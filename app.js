@@ -42,7 +42,7 @@ async function fetchLyrics(artist, title, index) {
     const response = await fetch(`https://api.lyrics.ovh/v1/${artist}/${title}`); // fetching data 
     const data = await response.json(); // convert promise to json format 
     if (data.error) {
-        lyricsResultShow[index].innerHTML = `<h3 class="text-danger">Sorry, No Lyrics Found!</h3>`; // if lyrics not found then it throw a alert to user
+        lyricsResultShow[index].innerHTML = `<h4 class="text-danger">Sorry, No Lyrics Found!</h4>`; // if lyrics not found then it throw a alert to user
     } else {
         lyricsResultShow[index].innerText = data.lyrics; // display lyrics result
         // console.log(data);
