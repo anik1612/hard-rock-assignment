@@ -6,6 +6,7 @@ const songName = document.getElementsByClassName('lyrics-name');
 const authorName = document.getElementsByClassName('author-name');
 const albumCoverImg = document.getElementsByClassName('album-cover-img');
 const albumName = document.getElementsByClassName('album-name');
+const songTitle = document.getElementsByClassName('song-title');
 
 const searchDiv = document.getElementById('search-result-div');
 const getLyricsBtn = document.getElementsByClassName('get-lyrics-btn');
@@ -54,6 +55,7 @@ function displayResult(data) {
         authorName[i].innerText = data.data[i].artist.name; // display album name
         albumCoverImg[i].src = data.data[i].album.cover; // display album cover pic
         albumName[i].innerText = data.data[i].album.title; //display song name
+        songTitle[i].innerText = data.data[i].title + ' - ' + data.data[i].artist.name;
     }
 }
 
