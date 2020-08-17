@@ -1,14 +1,17 @@
 //getting all essential dom element 
+//search related dom element
 const searchBtn = document.getElementById('search-btn');
 const searchBox = document.getElementById('search-box');
+const searchDiv = document.getElementById('search-result-div');
 
+//lyrics displaying related dom
 const songName = document.getElementsByClassName('lyrics-name');
 const authorName = document.getElementsByClassName('author-name');
 const albumCoverImg = document.getElementsByClassName('album-cover-img');
 const albumName = document.getElementsByClassName('album-name');
 const songTitle = document.getElementsByClassName('song-title');
 
-const searchDiv = document.getElementById('search-result-div');
+//get lyrics related dom element
 const getLyricsBtn = document.getElementsByClassName('get-lyrics-btn');
 const lyricsResultShow = document.getElementsByClassName('lyrics-result-show');
 
@@ -21,8 +24,8 @@ searchBtn.addEventListener('click', fetchApi);
 
 //fetch data from server by user search value
 async function fetchApi() {
-    const response = await fetch(`https://api.lyrics.ovh/suggest/${searchBox.value}`);
-    const data = await response.json(); //make fetch data to global variable for easy access from all function
+    const response = await fetch(`https://api.lyrics.ovh/suggest/${searchBox.value}`); // fetch data from api
+    const data = await response.json(); // convert server response to json format
     // console.log(data);
     if (data.error) {
         alert(`Sorry, something goes wrong can't fetch from server`);
