@@ -22,14 +22,14 @@ searchBtn.addEventListener('click', fetchApi);
 async function fetchApi() {
     const response = await fetch(`https://api.lyrics.ovh/suggest/${searchBox.value}`);
     const data = await response.json(); //make fetch data to global variable for easy access from all function
-    console.log(data);
-    if(data.error){
+    // console.log(data);
+    if (data.error) {
         alert(`Sorry, something goes wrong can't fetch from server`);
-    }else{
+    } else {
         displayResult(data); // call display result function to show user search data
         getLyrics(data);
     }
-    
+
 }
 
 
@@ -38,18 +38,17 @@ async function fetchLyrics(artist, title, index) {
     const response = await fetch(`https://api.lyrics.ovh/v1/${artist}/${title}`); // fetching data 
     const data = await response.json(); // convert promise to json format 
     if (data.error) {
-        // alert('Sorry, no lyrics found for this song.');
         lyricsResultShow[index].innerHTML = `<h3 class="text-danger">Sorry, No Lyrics Found!</h3>`; // if lyrics not found then it throw a alert to user
     } else {
         lyricsResultShow[index].innerText = data.lyrics; // display lyrics result
-        console.log(data);
+        // console.log(data);
     }
 }
 
 
 // displaying all search result
 function displayResult(data) {
-    searchDiv.style.display = 'block'; 
+    searchDiv.style.display = 'block';
     for (let i = 0; i < songName.length; i++) {
         songName[i].innerText = data.data[i].title; // display lyrics name
         authorName[i].innerText = data.data[i].artist.name; // display album name
@@ -59,14 +58,14 @@ function displayResult(data) {
 }
 
 // make get lyrics btn functional
-function getLyrics(data){
+function getLyrics(data) {
     for (let i = 0; i < getLyricsBtn.length; i++) {
-        const lyricsBtn = getLyricsBtn[i]; 
+        const lyricsBtn = getLyricsBtn[i];
         lyricsBtn.addEventListener('click', () => { // event handler for get lyrics button
-            const title = data.data[i].title; 
+            const title = data.data[i].title;
             const artist = data.data[i].artist.name;
             fetchLyrics(artist, title, i); // call fetch lyrics function with artist title and index parameter 
-            console.log(i);
+            // console.log(i);
         });
     }
 }
