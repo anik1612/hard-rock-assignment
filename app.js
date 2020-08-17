@@ -11,6 +11,7 @@ const searchDiv = document.getElementById('search-result-div');
 const getLyricsBtn = document.getElementsByClassName('get-lyrics-btn');
 const lyricsResultShow = document.getElementsByClassName('lyrics-result-show');
 
+// hide search result div
 searchDiv.style.display = 'none';
 
 //make search btn functional 
@@ -21,10 +22,10 @@ searchBtn.addEventListener('click', fetchApi);
 async function fetchApi() {
     const response = await fetch(`https://api.lyrics.ovh/suggest/${searchBox.value}`);
     const data = await response.json(); //make fetch data to global variable for easy access from all function
+    console.log(data);
     if(data.error){
         alert(`Sorry, something goes wrong can't fetch from server`);
     }else{
-        console.log(data);
         displayResult(data); // call display result function to show user search data
         getLyrics(data);
     }
@@ -37,7 +38,8 @@ async function fetchLyrics(artist, title, index) {
     const response = await fetch(`https://api.lyrics.ovh/v1/${artist}/${title}`); // fetching data 
     const data = await response.json(); // convert promise to json format 
     if (data.error) {
-        alert('Sorry, no lyrics found for this song.'); // if lyrics not found then it throw a alert to user
+        // alert('Sorry, no lyrics found for this song.');
+        lyricsResultShow[index].innerHTML = `<h3 class="text-danger">Sorry, No Lyrics Found!</h3>`; // if lyrics not found then it throw a alert to user
     } else {
         lyricsResultShow[index].innerText = data.lyrics; // display lyrics result
         console.log(data);
